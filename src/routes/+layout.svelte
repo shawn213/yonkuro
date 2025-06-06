@@ -8,12 +8,12 @@
 
 <div class="w-full left-0 fixed z-40 block">
 	<Navbar class="px-2 py-1 w-full left-0 border-b flex flex-wrap justify-between items-center">
-	  <NavBrand href="/">
+	  <NavBrand href="{base}/">
 		<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
 	  </NavBrand>
 	  <NavHamburger />
 	  <NavUl>
-		<NavLi href="/">Home</NavLi>
+		<NavLi href="{base}/">Home</NavLi>
 		<NavLi href="{base}/about">About</NavLi>
 	  </NavUl>
 	</Navbar>
