@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from "flowbite-svelte";
+	import { base } from '$app/paths';
 
 	let { children } = $props();
 </script>
@@ -13,7 +14,7 @@
 	  <NavHamburger />
 	  <NavUl>
 		<NavLi href="/">Home</NavLi>
-		<NavLi href="/about">About</NavLi>
+		<NavLi href="{base}/about">About</NavLi>
 	  </NavUl>
 	</Navbar>
 	{@render children()}
