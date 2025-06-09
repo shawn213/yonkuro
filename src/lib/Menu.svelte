@@ -5,17 +5,16 @@
 
 	const menues = [
 		{ href: `${base}/`, label: 'Home' },
-		{ href: `${base}/about`, label: 'About' },
-		{ href: `${base}/contact`, label: 'Contact' }
+		{ href: `${base}/about`, label: 'About' }
 	];
 </script>
 
 <Navbar class="left-0 w-full px-2 py-0 dark:bg-gray-800" color="form">
 	<NavBrand href="/">
 		<img src="https://svelte.dev/favicon.png" class="mr-3 h-6 sm:h-9" alt="Svelte Logo" />
-		<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+		<!-- <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
 			選擇障礙
-		</span>
+		</span> -->
 	</NavBrand>
 	<NavHamburger />
 	<NavUl>
