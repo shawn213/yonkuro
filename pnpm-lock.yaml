@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@svelte-put/qr':
+        specifier: ^2.1.0
+        version: 2.1.0(svelte@5.33.14)
       '@sveltejs/adapter-static':
         specifier: ^3.0.8
         version: 3.0.8(@sveltejs/kit@2.21.2(@sveltejs/vite-plugin-svelte@5.1.0(svelte@5.33.14)(vite@6.3.5(jiti@2.4.2)(lightningcss@1.30.1)))(svelte@5.33.14)(vite@6.3.5(jiti@2.4.2)(lightningcss@1.30.1)))
@@ -371,6 +374,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@svelte-put/qr@2.1.0':
+    resolution: {integrity: sha512-7HzQjoNZI9k6J4R6tnMi0ZGtRQKIFmZqzeo2GtkKZkumtPYByuqjGcB/ApFkxfg+J5mARKezWzKiq9EDJ6htRg==}
+    peerDependencies:
+      svelte: ^5.1.0
+
   '@sveltejs/acorn-typescript@1.0.5':
     resolution: {integrity: sha512-IwQk4yfwLdibDlrXVE04jTZYlLnwsTT2PIOQQGNLWfjavGifnk1JD1LcZjZaBTRcxZu2FfPfNLOE04DSu9lqtQ==}
     peerDependencies:
@@ -662,6 +670,9 @@ packages:
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
+
+  headless-qr@1.0.3:
+    resolution: {integrity: sha512-HHVwf1i++Ho2vFstHxAdfP0OjB7Di44nGXbh3VXciuzwkuFb1oeFDCrfOLjFgHip/Kbc/wq2GOaSTiKQ81K/Yg==}
 
   is-core-module@2.16.1:
     resolution: {integrity: sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==}
@@ -1212,6 +1223,11 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.41.1':
     optional: true
 
+  '@svelte-put/qr@2.1.0(svelte@5.33.14)':
+    dependencies:
+      headless-qr: 1.0.3
+      svelte: 5.33.14
+
   '@sveltejs/acorn-typescript@1.0.5(acorn@8.14.1)':
     dependencies:
       acorn: 8.14.1
@@ -1509,6 +1525,8 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
+
+  headless-qr@1.0.3: {}
 
   is-core-module@2.16.1:
     dependencies:
