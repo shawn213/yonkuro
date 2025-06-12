@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import Menu from '$lib/Menu.svelte';
+	import Menu from '$lib/components/Menu.svelte';
 	import { Span } from 'flowbite-svelte';
 
 	let { children } = $props();

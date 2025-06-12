@@ -17,6 +17,9 @@ const config = {
 				if (status === 404) return;
 				throw new Error(`${status} ${path}`);
 			}
+		},
+		alias: {
+			'utils/*': 'src/utils/*'
 		}
 	}
 };
