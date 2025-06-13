@@ -21,6 +21,9 @@
 		"@tailwindcss/forms": "^0.5.9",
 		"@tailwindcss/typography": "^0.5.15",
 		"@tailwindcss/vite": "^4.0.0",
+		"@types/lodash": "^4.17.17",
+		"@types/lodash-es": "^4.17.12",
+		"dayjs": "^1.11.13",
 		"flowbite": "^3.1.2",
 		"flowbite-svelte": "^1.5.5",
 		"flowbite-svelte-icons": "^2.2.0",
@@ -38,5 +41,8 @@
 			"@tailwindcss/oxide",
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"lodash": "^4.17.21"
 	}
 }

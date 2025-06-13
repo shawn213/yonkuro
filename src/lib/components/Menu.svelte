@@ -1,11 +1,21 @@
 <script lang="ts">
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, DarkMode, Span } from 'flowbite-svelte';
+	import {
+		Navbar,
+		NavBrand,
+		NavLi,
+		NavUl,
+		NavHamburger,
+		DarkMode,
+		Dropdown,
+		DropdownItem
+	} from 'flowbite-svelte';
 	import * as Icon from 'flowbite-svelte-icons';
 	import { base } from '$app/paths';
 
 	const menues = [
-		{ href: `${base}/`, label: 'Home' },
-		{ href: `${base}/about`, label: 'About' }
+		{ name: 'Home', href: `${base}/` },
+		{ name: 'About', href: `${base}/about` },
+		{ name: 'Tools', childs: [{ name: 'Work', href: `${base}/tools/work` }] }
 	];
 </script>
 
@@ -16,18 +26,34 @@
 			選擇障礙
 		</span> -->
 	</NavBrand>
-	<NavHamburger />
 	<NavUl>
-		{#each menues as { href, label }}
-			<NavLi {href}>{label}</NavLi>
+		{#each menues as menu}
+			{#if menu.childs}
+				<NavLi class="cursor-pointer">
+					{menu.name}<Icon.ChevronDownOutline
+						class="text-primary-800 ms-2 inline h-6 w-6 dark:text-white" />
+				</NavLi>
+				<Dropdown simple class="w-44">
+					{#each menu.childs as child}
+						<DropdownItem href={child.href}>
+							{child.name}
+						</DropdownItem>
+					{/each}
+				</Dropdown>
+			{:else}
+				<NavLi href={menu.href}>{menu.name}</NavLi>
+			{/if}
 		{/each}
 	</NavUl>
-	<DarkMode class="text-lg">
-		{#snippet lightIcon()}
-			<Icon.ThumbsUpSolid color="white" />
-		{/snippet}
-		{#snippet darkIcon()}
-			<Icon.ThumbsDownSolid color="green" />
-		{/snippet}
-	</DarkMode>
+	<div class="flex items-center md:order-2">
+		<DarkMode class="text-lg">
+			{#snippet lightIcon()}
+				<Icon.ThumbsUpSolid color="white" />
+			{/snippet}
+			{#snippet darkIcon()}
+				<Icon.ThumbsDownSolid color="green" />
+			{/snippet}
+		</DarkMode>
+		<NavHamburger />
+	</div>
 </Navbar>
