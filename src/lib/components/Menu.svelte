@@ -15,7 +15,13 @@
 	const menues = [
 		{ name: 'Home', href: `${base}/` },
 		{ name: 'About', href: `${base}/about` },
-		{ name: 'Tools', childs: [{ name: 'Work', href: `${base}/tools/work` }] }
+		{
+			name: 'Tools',
+			childs: [
+				{ name: 'Work', href: `${base}/tools/work`, icon: 'HammerOutline' },
+				{ name: 'Encryption', href: `${base}/tools/encryption`, icon: 'LockOutline' }
+			]
+		}
 	];
 </script>
 
@@ -33,10 +39,11 @@
 					{menu.name}<Icon.ChevronDownOutline
 						class="text-primary-800 ms-2 inline h-6 w-6 dark:text-white" />
 				</NavLi>
-				<Dropdown simple class="w-44">
+				<Dropdown simple>
 					{#each menu.childs as child}
-						<DropdownItem href={child.href}>
-							{child.name}
+						<DropdownItem href={child.href} class="flex items-center gap-2">
+							<svelte:component
+								this={child.icon ? Icon[child.icon] : Icon.AppleSolid} />{child.name}
 						</DropdownItem>
 					{/each}
 				</Dropdown>
