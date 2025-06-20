@@ -18,8 +18,10 @@
 		{
 			name: 'Tools',
 			childs: [
-				{ name: 'Work', href: `${base}/tools/work`, icon: 'HammerOutline' },
-				{ name: 'Encryption', href: `${base}/tools/encryption`, icon: 'LockOutline' }
+				{ name: 'Work', href: `${base}/tools/work`, icon: 'ClockOutline' },
+				{ name: 'Encryption', href: `${base}/tools/encryption`, icon: 'LockOutline' },
+				{ name: 'Yaml', href: `${base}/tools/yaml`, icon: 'LaptopCodeOutline' },
+				{ name: 'Json', href: `${base}/tools/json`, icon: 'LaptopCodeOutline' }
 			]
 		}
 	];
