@@ -8,27 +8,29 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-	--color-primary-50: #fff5f2;
-	--color-primary-100: #fff1ee;
-	--color-primary-200: #ffe4de;
-	--color-primary-300: #ffd5cc;
-	--color-primary-400: #ffbcad;
-	--color-primary-500: #fe795d;
-	--color-primary-600: #ef562f;
-	--color-primary-700: #eb4f27;
-	--color-primary-800: #cc4522;
-	--color-primary-900: #a5371b;
+	--color-primary-50: oklch(0.986 0.031 120.757);
+	--color-primary-100: oklch(0.967 0.067 122.328);
+	--color-primary-200: oklch(0.938 0.127 124.321);
+	--color-primary-300: oklch(0.897 0.196 126.665);
+	--color-primary-400: oklch(0.841 0.238 128.85);
+	--color-primary-500: oklch(0.768 0.233 130.85);
+	--color-primary-600: oklch(0.648 0.2 131.684);
+	--color-primary-700: oklch(0.532 0.157 131.589);
+	--color-primary-800: oklch(0.453 0.124 130.933);
+	--color-primary-900: oklch(0.405 0.101 131.063);
+	--color-primary-950: oklch(0.274 0.072 132.109);
 
-	--color-secondary-50: #f0f9ff;
-	--color-secondary-100: #e0f2fe;
-	--color-secondary-200: #bae6fd;
-	--color-secondary-300: #7dd3fc;
-	--color-secondary-400: #38bdf8;
-	--color-secondary-500: #0ea5e9;
-	--color-secondary-600: #0284c7;
-	--color-secondary-700: #0369a1;
-	--color-secondary-800: #075985;
-	--color-secondary-900: #0c4a6e;
+	--color-secondary-50: oklch(0.982 0.018 155.826);
+	--color-secondary-100: oklch(0.962 0.044 156.743);
+	--color-secondary-200: oklch(0.925 0.084 155.995);
+	--color-secondary-300: oklch(0.871 0.15 154.449);
+	--color-secondary-400: oklch(0.792 0.209 151.711);
+	--color-secondary-500: oklch(0.723 0.219 149.579);
+	--color-secondary-600: oklch(0.627 0.194 149.214);
+	--color-secondary-700: oklch(0.527 0.154 150.069);
+	--color-secondary-800: oklch(0.448 0.119 151.328);
+	--color-secondary-900: oklch(0.393 0.095 152.535);
+	--color-secondary-950: oklch(0.266 0.065 152.934);
 }
 
 @source "../node_modules/flowbite-svelte/dist";

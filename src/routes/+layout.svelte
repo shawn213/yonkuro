@@ -5,16 +5,19 @@
 	import { getSpreadsheetValues } from '$lib/utils/googleSheets';
 	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
+	import { page } from '$app/state';
+	import { base } from '$app/paths';
 
 	let holidays: Record<string, string>[] = [];
 
 	const getHolidays = async () => {
-		const data = await getSpreadsheetValues('1NlEFP8qKj9YiE8EJ_8ipPN04mhkdjUL4OABP4LO7gPo', 'now');
+		const data = await getSpreadsheetValues(import.meta.env.VITE_HOLIDAY_SHEET, 'now');
 		holidays = data;
 		localStorage.setItem(
 			'holidays',
 			JSON.stringify({ days: holidays, date: dayjs().format('YYYY-MM') })
 		);
+		location.reload();
 		return holidays;
 	};
 
@@ -34,8 +37,13 @@
 	let { children } = $props();
 </script>
 
+<svelte:head>
+	<title>toriko - {page.url.pathname.replace(base, '')}</title>
+</svelte:head>
 <div class="relative">
 	<Menu />
-	{@render children()}
+	<div class="p-2">
+		{@render children()}
+	</div>
 	<Span class="fixed right-3 bottom-1">{import.meta.env.VITE_VERSION}</Span>
 </div>
