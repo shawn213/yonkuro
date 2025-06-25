@@ -13,6 +13,7 @@
 	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
 	import _ from 'lodash';
+	import localforage from 'localforage';
 
 	let startMonth = dayjs().format('YYYYMM');
 	let endMonth = dayjs().format('YYYYMM');
@@ -23,16 +24,8 @@
 	$: items = [];
 	let holidays = { days: [] };
 
-	onMount(() => {
-		const holidays = localStorage.getItem('holidays');
-		if (!holidays) {
-			fetch('/holidays.json')
-				.then((response) => response.json())
-				.then((data) => {
-					localStorage.setItem('holidays', JSON.stringify(data));
-				})
-				.catch((error) => console.error('Error fetching holidays:', error));
-		}
+	onMount(async () => {
+		holidays = (await localforage.getItem('holidays')) || { days: [] };
 	});
 
 	const isWorkDay = (date: any) => {
@@ -62,7 +55,6 @@
 					percentTime
 				};
 				preMonth = startDay.month();
-				console.log(preMonth);
 				idx += 1;
 				workDay = 0;
 				percentDay = 0;

@@ -48,6 +48,7 @@
 		"js-base64": "^3.7.7",
 		"json5": "^2.2.3",
 		"jwt-decode": "^4.0.0",
+		"localforage": "^1.10.0",
 		"lodash": "^4.17.21",
 		"pnpm": "^10.12.1",
 		"svelte-jsoneditor": "^3.6.0",

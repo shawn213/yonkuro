@@ -19,7 +19,7 @@ const config = {
 			}
 		},
 		alias: {
-			'utils/*': 'src/utils/*'
+			'$models/*': 'src/models/*'
 		}
 	}
 };

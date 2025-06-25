@@ -7,25 +7,23 @@
 	import dayjs from 'dayjs';
 	import { page } from '$app/state';
 	import { base } from '$app/paths';
+	import localforage from 'localforage';
 
 	let holidays: Record<string, string>[] = [];
 
 	const getHolidays = async () => {
 		const data = await getSpreadsheetValues(import.meta.env.VITE_HOLIDAY_SHEET, 'now');
 		holidays = data;
-		localStorage.setItem(
-			'holidays',
-			JSON.stringify({ days: holidays, date: dayjs().format('YYYY-MM') })
-		);
+		localforage.setItem('holidays', { days: holidays, date: dayjs().format('YYYY-MM') });
 		location.reload();
 		return holidays;
 	};
 
 	onMount(async () => {
-		const holidays = localStorage.getItem('holidays');
+		const holidays = await localforage.getItem('holidays');
 		if (holidays) {
-			const parsedHolidays = JSON.parse(holidays);
-			if (parsedHolidays.date !== dayjs().format('YYYY-MM')) {
+			const parsedHolidays = holidays;
+			if (parsedHolidays['date'] !== dayjs().format('YYYY-MM')) {
 				await getHolidays();
 				return;
 			}
