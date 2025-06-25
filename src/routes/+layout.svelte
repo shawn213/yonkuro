@@ -7,29 +7,35 @@
 	import dayjs from 'dayjs';
 	import { page } from '$app/state';
 	import { base } from '$app/paths';
+	import { holidayStore, type Holiday } from '$stores/advancedGenericStore';
 	import localforage from 'localforage';
 
-	let holidays: Record<string, string>[] = [];
+	let holidays: Holiday = {
+		date: '',
+		days: []
+	};
 
 	const getHolidays = async () => {
 		const data = await getSpreadsheetValues(import.meta.env.VITE_HOLIDAY_SHEET, 'now');
-		holidays = data;
-		localforage.setItem('holidays', { days: holidays, date: dayjs().format('YYYY-MM') });
-		location.reload();
-		return holidays;
+		localforage.setItem('holidays', { days: data, date: dayjs().format('YYYY-MM') });
+		holidayStore.set({ days: data, date: dayjs().format('YYYY-MM') });
+		return data;
 	};
 
-	onMount(async () => {
-		const holidays = await localforage.getItem('holidays');
-		if (holidays) {
-			const parsedHolidays = holidays;
-			if (parsedHolidays['date'] !== dayjs().format('YYYY-MM')) {
-				await getHolidays();
-				return;
+	onMount(() => {
+		localforage.getItem('holidays').then((holidays: Holiday | null) => {
+			if (holidays) {
+				const parsedHolidays = holidays;
+				if (parsedHolidays.date !== dayjs().format('YYYY-MM')) {
+					getHolidays();
+					return;
+				} else {
+					holidayStore.set(parsedHolidays);
+				}
+			} else {
+				getHolidays();
 			}
-		} else {
-			await getHolidays();
-		}
+		});
 	});
 
 	let { children } = $props();

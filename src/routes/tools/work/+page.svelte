@@ -13,7 +13,7 @@
 	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
 	import _ from 'lodash';
-	import localforage from 'localforage';
+	import { holidayStore, type Holiday } from '$stores/advancedGenericStore';
 
 	let startMonth = dayjs().format('YYYYMM');
 	let endMonth = dayjs().format('YYYYMM');
@@ -24,8 +24,11 @@
 	$: items = [];
 	let holidays = { days: [] };
 
-	onMount(async () => {
-		holidays = (await localforage.getItem('holidays')) || { days: [] };
+	onMount(() => {
+		holidayStore.subscribe((hs) => {
+			holidays = hs;
+			console.log('holidays', holidays);
+		});
 	});
 
 	const isWorkDay = (date: any) => {
