@@ -7,13 +7,12 @@
 		TableBodyCell,
 		TableBodyRow,
 		TableHead,
-		TableHeadCell,
-		Img
+		TableHeadCell
 	} from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
 	import _ from 'lodash';
-	import { holidayStore, type Holiday } from '$stores/advancedGenericStore';
+	import { holidayStore } from '$stores/advancedGenericStore';
 
 	let startMonth = dayjs().format('YYYYMM');
 	let endMonth = dayjs().format('YYYYMM');
