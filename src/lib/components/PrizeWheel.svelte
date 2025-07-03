@@ -18,10 +18,9 @@
 	]; // 默認顏色
 	export let spinDuration: number = 4000; // 旋轉時間，單位為毫秒
 	export let spinRevolutions: number = 5; // 旋轉圈數
-	export let buttonText: string = '開始搖獎'; // 按鈕文字
-	export let spinningText: string = '轉動中...'; // 旋轉中按鈕文字
 	export let resultPrefix: string = '恭喜中獎：'; // 結果前綴
 	export let resultSuffix: string = '！'; // 結果後綴
+	export let turn: boolean = false; // 是否正在轉動
 
 	// 內部狀態
 	let spinning = false;
@@ -39,6 +38,12 @@
 		}
 		rotation = 0;
 		result = '';
+	}
+
+	$: if (turn) {
+		// 當 turn 為 true 時開始旋轉
+		spin();
+		turn = false; // 重置 turn 狀態
 	}
 
 	// 轉盤旋轉動畫
@@ -124,17 +129,6 @@
 	</div>
 	<div
 		class="pointer absolute top-[-10px] left-1/2 z-10 h-0 w-0 -translate-x-1/2 border-t-[20px] border-r-[10px] border-l-[10px] border-t-red-600 border-r-transparent border-l-transparent drop-shadow sm:border-t-[25px] sm:border-r-[12px] sm:border-l-[12px] md:border-t-[30px] md:border-r-[15px] md:border-l-[15px]">
-	</div>
-	<button
-		on:click={spin}
-		disabled={spinning}
-		class="mt-5 w-full cursor-pointer rounded-md border-none bg-green-600 px-4 py-2 text-base text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-400 sm:mt-6 sm:w-auto sm:px-6 sm:py-3 sm:text-lg md:mt-8">
-		{spinning ? spinningText : buttonText}
-	</button>
-	<div
-		class="mt-3 min-h-[2em] text-lg font-bold text-red-600 sm:mt-4 sm:text-xl md:mt-5 md:text-2xl"
-		aria-live="polite">
-		{result}
 	</div>
 </div>
 
@@ -244,10 +238,6 @@
 		.prize-text {
 			font-size: 0.8rem !important;
 			top: 8% !important;
-		}
-		button {
-			width: 100%;
-			font-size: 1rem;
 		}
 	}
 
