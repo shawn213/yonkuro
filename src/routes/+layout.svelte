@@ -10,11 +10,6 @@
 	import { holidayStore, type Holiday } from '$stores/advancedGenericStore';
 	import localforage from 'localforage';
 
-	let holidays: Holiday = {
-		date: '',
-		days: []
-	};
-
 	const getHolidays = async () => {
 		const data = await getSpreadsheetValues(import.meta.env.VITE_HOLIDAY_SHEET, 'now');
 		localforage.setItem('holidays', { days: data, date: dayjs().format('YYYY-MM') });
@@ -38,7 +33,7 @@
 		});
 	});
 
-	let { children } = $props();
+	const { children } = $props();
 </script>
 
 <svelte:head>
@@ -51,3 +46,11 @@
 	</div>
 	<Span class="fixed right-3 bottom-1">{import.meta.env.VITE_VERSION}</Span>
 </div>
+
+<style>
+	:global(textarea) {
+		font-family:
+			'Noto Sans TC', 'Open Sans', 'Roboto', 'PingFang TC', 'Microsoft JhengHei', 'Helvetica Neue',
+			Arial, sans-serif;
+	}
+</style>

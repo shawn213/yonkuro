@@ -26,7 +26,6 @@
 	onMount(() => {
 		holidayStore.subscribe((hs) => {
 			holidays = hs;
-			console.log('holidays', holidays);
 		});
 	});
 
