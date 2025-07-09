@@ -22,5 +22,7 @@ const holidayStore = createAdvancedStore<Holiday>({
 	days: []
 });
 
-export { holidayStore };
+const menuStore = createAdvancedStore<boolean>(false);
+
+export { holidayStore, menuStore };
 export type { Holiday };

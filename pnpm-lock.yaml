@@ -76,11 +76,11 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(rollup@4.41.1)
       flowbite-svelte:
-        specifier: ^1.5.5
-        version: 1.5.5(rollup@4.41.1)(svelte@5.33.14)(tailwindcss@4.1.8)
+        specifier: ^1.8.6
+        version: 1.8.6(rollup@4.41.1)(svelte@5.33.14)(tailwindcss@4.1.8)
       flowbite-svelte-icons:
-        specifier: ^2.2.0
-        version: 2.2.0(svelte@5.33.14)
+        specifier: ^2.2.1
+        version: 2.2.1(svelte@5.33.14)
       prettier:
         specifier: ^3.4.2
         version: 3.5.3
@@ -289,8 +289,17 @@ packages:
   '@floating-ui/core@1.7.1':
     resolution: {integrity: sha512-azI0DrjMMfIug/ExbBaeDVJXcY0a7EPvPjb2xAJPa4HeimBX+Z18HK8QQR3jb6356SnDDdxx+hinMLcJEDdOjw==}
 
+  '@floating-ui/core@1.7.2':
+    resolution: {integrity: sha512-wNB5ooIKHQc+Kui96jE/n69rHFWAVoxn5CAzL1Xdd8FG03cgY3MLO+GF9U3W737fYDSgPWA6MReKhBQBop6Pcw==}
+
   '@floating-ui/dom@1.7.1':
     resolution: {integrity: sha512-cwsmW/zyw5ltYTUeeYJ60CnQuPqmGwuGVhG9w0PRaRKkAyi38BT5CKrpIbb+jtahSwUl04cWzSx9ZOIxeS6RsQ==}
+
+  '@floating-ui/dom@1.7.2':
+    resolution: {integrity: sha512-7cfaOQuCS27HD7DX+6ib2OrnW+b4ZBwDNnCcT0uTyidcmyWb03FnQqJybDBoCnpdxwBSfA94UAYlRCt7mV+TbA==}
+
+  '@floating-ui/utils@0.2.10':
+    resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
@@ -895,13 +904,13 @@ packages:
   flowbite-datepicker@1.3.2:
     resolution: {integrity: sha512-6Nfm0MCVX3mpaR7YSCjmEO2GO8CDt6CX8ZpQnGdeu03WUCWtEPQ/uy0PUiNtIJjJZWnX0Cm3H55MOhbD1g+E/g==}
 
-  flowbite-svelte-icons@2.2.0:
-    resolution: {integrity: sha512-X+xZXeLaYS/NaybPonw1RGIIzmrExmCOrva62NPCXN52xGmJWqcSnnbHO4+iZsDD4V6EsDRqwH8tVq6t6SLLQg==}
+  flowbite-svelte-icons@2.2.1:
+    resolution: {integrity: sha512-SH59319zN4TFpmvFMD7+0ETyDxez4Wyw3mgz7hkjhvrx8HawNAS3Fp7au84pZEs1gniX4hvXIg54U+4YybV2rA==}
     peerDependencies:
       svelte: ^5.0.0
 
-  flowbite-svelte@1.5.5:
-    resolution: {integrity: sha512-mryq6E7dLrlbWmCZxs61rDrN3RsOLpxRHoq4Y6YvbOMTQQ9hx4talu4YCYgn6xkFvz6O8NjqcC9h+6ZU/f03bQ==}
+  flowbite-svelte@1.8.6:
+    resolution: {integrity: sha512-Brg2kj+JOeG20oOba9bWdSp53Tp1ZbZI9XmAxlbvlwOB3vBwsEGcopA80o4M434GLfzMyUP7OTIWFgb31eyRRA==}
     peerDependencies:
       svelte: ^5.0.0
       tailwindcss: ^4.1.4
@@ -1315,8 +1324,8 @@ packages:
   tailwind-merge@3.0.2:
     resolution: {integrity: sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==}
 
-  tailwind-merge@3.3.0:
-    resolution: {integrity: sha512-fyW/pEfcQSiigd5SNn0nApUOxx0zB/dm6UDU/rEwc2c3sX2smWUNbapHv+QRqLGVp9GWX3THIa7MUGPo+YkDzQ==}
+  tailwind-merge@3.3.1:
+    resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
 
   tailwind-variants@1.0.0:
     resolution: {integrity: sha512-2WSbv4ulEEyuBKomOunut65D8UZwxrHoRfYnxGcQNnHqlSCp2+B7Yz2W+yrNDrxRodOXtGD/1oCcKGNBnUqMqA==}
@@ -1558,10 +1567,21 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.9
 
+  '@floating-ui/core@1.7.2':
+    dependencies:
+      '@floating-ui/utils': 0.2.10
+
   '@floating-ui/dom@1.7.1':
     dependencies:
       '@floating-ui/core': 1.7.1
       '@floating-ui/utils': 0.2.9
+
+  '@floating-ui/dom@1.7.2':
+    dependencies:
+      '@floating-ui/core': 1.7.2
+      '@floating-ui/utils': 0.2.10
+
+  '@floating-ui/utils@0.2.10': {}
 
   '@floating-ui/utils@0.2.9': {}
 
@@ -2080,21 +2100,21 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  flowbite-svelte-icons@2.2.0(svelte@5.33.14):
+  flowbite-svelte-icons@2.2.1(svelte@5.33.14):
     dependencies:
       clsx: 2.1.1
       svelte: 5.33.14
-      tailwind-merge: 3.3.0
+      tailwind-merge: 3.3.1
 
-  flowbite-svelte@1.5.5(rollup@4.41.1)(svelte@5.33.14)(tailwindcss@4.1.8):
+  flowbite-svelte@1.8.6(rollup@4.41.1)(svelte@5.33.14)(tailwindcss@4.1.8):
     dependencies:
-      '@floating-ui/dom': 1.7.1
-      '@floating-ui/utils': 0.2.9
+      '@floating-ui/dom': 1.7.2
+      '@floating-ui/utils': 0.2.10
       apexcharts: 4.7.0
       clsx: 2.1.1
       flowbite: 3.1.2(rollup@4.41.1)
       svelte: 5.33.14
-      tailwind-merge: 3.3.0
+      tailwind-merge: 3.3.1
       tailwind-variants: 1.0.0(tailwindcss@4.1.8)
       tailwindcss: 4.1.8
     transitivePeerDependencies:
@@ -2461,7 +2481,7 @@ snapshots:
 
   tailwind-merge@3.0.2: {}
 
-  tailwind-merge@3.3.0: {}
+  tailwind-merge@3.3.1: {}
 
   tailwind-variants@1.0.0(tailwindcss@4.1.8):
     dependencies:
