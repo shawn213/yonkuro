@@ -17,13 +17,17 @@
 	import { menuStore } from '$stores/advancedGenericStore';
 
 	let timer;
+	let touchStartX = 0;
+	let touchStartY = 0;
+	const longPressDuration = 5000; // 5 秒
+	const moveThreshold = 20; // 允許移動的像素距離
 
 	// 長按處理函數
 	const handleTouchStart = () => {
 		timer = setTimeout(() => {
 			menuStore.update((value) => !value);
 			timer = null;
-		}, 5000);
+		}, longPressDuration);
 	};
 
 	const handleTouchEnd = () => {
@@ -33,10 +37,18 @@
 		}
 	};
 
-	const handleTouchMove = () => {
-		if (timer) {
-			clearTimeout(timer);
-			timer = null;
+	// 長按移動處理函數
+	const handleTouchMove = (event: TouchEvent) => {
+		const touchX = event.touches[0].clientX;
+		const touchY = event.touches[0].clientY;
+		const deltaX = Math.abs(touchX - touchStartX);
+		const deltaY = Math.abs(touchY - touchStartY);
+
+		if (deltaX > moveThreshold || deltaY > moveThreshold) {
+			if (timer) {
+				clearTimeout(timer);
+				timer = null;
+			}
 		}
 	};
 
