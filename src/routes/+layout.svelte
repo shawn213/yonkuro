@@ -8,17 +8,18 @@
 	import { page } from '$app/state';
 	import { base } from '$app/paths';
 	import { holidayStore, type Holiday } from '$stores/advancedGenericStore';
-	import localforage from 'localforage';
+	import { clearUnnamedData, holidayDataStore } from '$stores/localforageStore';
 
 	const getHolidays = async () => {
 		const data = await getSpreadsheetValues(import.meta.env.VITE_HOLIDAY_SHEET, 'now');
-		localforage.setItem('holidays', { days: data, date: dayjs().format('YYYY-MM') });
+		holidayDataStore.setItem('holidays', { days: data, date: dayjs().format('YYYY-MM') });
 		holidayStore.set({ days: data, date: dayjs().format('YYYY-MM') });
 		return data;
 	};
 
-	onMount(() => {
-		localforage.getItem('holidays').then((holidays: Holiday | null) => {
+	onMount(async () => {
+		await clearUnnamedData();
+		holidayDataStore.getItem('holidays').then((holidays: Holiday | null) => {
 			if (holidays) {
 				const parsedHolidays = holidays;
 				if (parsedHolidays.date !== dayjs().format('YYYY-MM')) {
@@ -48,9 +49,9 @@
 </div>
 
 <style>
-	:global(textarea) {
+	:global(textarea, input, label) {
 		font-family:
-			'Noto Sans TC', 'Open Sans', 'Roboto', 'PingFang TC', 'Microsoft JhengHei', 'Helvetica Neue',
-			Arial, sans-serif;
+			Consolas, 'Noto Sans TC', 'Open Sans', 'Roboto', 'PingFang TC', 'Microsoft JhengHei',
+			'Helvetica Neue', Arial, sans-serif;
 	}
 </style>

@@ -1,85 +1,142 @@
-<script lang="ts">
-	import { onDestroy } from 'svelte';
-	import { Button, Label, Input, Textarea } from 'flowbite-svelte';
+<script>
+	import { onMount } from 'svelte';
+	import {
+		Table,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell,
+		Label,
+		Span
+	} from 'flowbite-svelte';
+	import dayjs from 'dayjs';
+	import { stepDataStore } from '$stores/localforageStore';
 	import _ from 'lodash';
-	import PrizeWheel from '$lib/components/PrizeWheel.svelte';
+	import { getSpreadsheetValues } from '$lib/utils/googleSheets';
 
-	const rows = 10;
-	// 獎項列表 - 可以自由增減獎項數量
-	let prizes = ['獎項A', '獎項B', '獎項C', '獎項D'];
+	let list = [];
 
-	let turn = false;
+	// 計算從 7 月 1 日到昨天的總天數
+	const startDate = dayjs('2025-07-01');
+	const yesterday = dayjs();
+	const totalDays = yesterday.diff(startDate, 'day') + 1;
 
-	// 自定義轉盤設置
-	let spinRevolutions = 5; // 轉動圈數
-	let spinDuration = 4000; // 轉動時間，單位為毫秒
-	let lastPrize = ''; // 記錄最後一次抽中的獎項
-	let prize = ''; // 當前獎項
+	// 計算目標步數和團隊步數
+	const targetSteps = Math.min(totalDays, 20) * 5000;
+	const teamSteps = targetSteps + targetSteps * 0.25;
 
-	onDestroy(() => {
-		turn = false; // 清理轉盤狀態
-	});
-
-	// 增加旋轉圈數
-	function increaseRevolutions() {
-		spinRevolutions++;
-	}
-
-	// 減少旋轉圈數
-	function decreaseRevolutions() {
-		if (spinRevolutions > 1) {
-			spinRevolutions--;
+	// 格式化百分比
+	const formatPercentage = (value) => {
+		if (value === Infinity || isNaN(value)) {
+			return 'N/A';
 		}
-	}
-
-	// 增加旋轉時間
-	function increaseDuration() {
-		spinDuration += 1000; // 增加1秒
-	}
-
-	// 減少旋轉時間
-	function decreaseDuration() {
-		if (spinDuration > 1000) {
-			spinDuration -= 1000; // 減少1秒
-		}
-	}
-
-	// 處理轉盤結果事件 - Svelte 5 方式
-	const handlePrizeResult = (resultData) => {
-		lastPrize = resultData.prize;
-		prizes = _.without(prizes, lastPrize); // 移除已抽中的獎項
-		turn = false; // 停止轉盤
+		return (value * 100).toFixed(2) + '%';
 	};
 
-	$: if (prize.length > 4) {
-		prizes = prize.split(/[\r\n,;]+/).filter((item) => item.trim() !== '');
-	}
+	const getColor = (achievementRate) => {
+		if (achievementRate >= 1) {
+			return 'text-green-400';
+		} else if (achievementRate > 0.9 && achievementRate < 1) {
+			return 'text-orange-400';
+		} else if (achievementRate <= 0.9) {
+			return 'text-red-500';
+		}
+		return '';
+	};
+
+	const getMissingStepsStyle = (missingSteps) => {
+		if (missingSteps > 5000) {
+			return 'text-red-500';
+		} else if (missingSteps > 0) {
+			return 'text-yellow-300';
+		}
+		return '';
+	};
+
+	const getEncouragement = (missingSteps) => {
+		if (missingSteps > 5000) {
+			const missingStepsDays = Math.ceil(missingSteps / 5000);
+			return `還差 ${missingStepsDays} 天的份量，一天 5000 步並不難！加油！`;
+		} else if (missingSteps > 0) {
+			return '加油！只差一天的份量！';
+		}
+		return '';
+	};
+
+	// 添加千分號格式化函數
+	const formatNumber = (num) => {
+		return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	};
+
+	const loadData = async () => {
+		const today = dayjs().format('YYYY-MM-DD HH:mm');
+
+		// 如果資料不存在或不是最新的，則重新查詢
+		const spreadsheetId = import.meta.env.VITE_STEP_SHEET; // 替換為您的 Google Sheet ID
+		const sheetName = 'step'; // 替換為您的 Sheet 名稱
+		const googleSheetData = await getSpreadsheetValues(spreadsheetId, sheetName);
+
+		if (googleSheetData.length > 0) {
+			// 將資料儲存到 stepDataStore
+			await stepDataStore.setItem('stepData', {
+				date: today,
+				data: googleSheetData
+			});
+			list = _.sortBy(googleSheetData, (item) => parseInt(item.total, 10));
+		}
+	};
+
+	onMount(async () => {
+		const storedData = await stepDataStore.getItem('stepData');
+		if (storedData && storedData.date === dayjs().format('YYYY-MM-DD HH:mm')) {
+			list = _.sortBy(storedData.data, (item) => parseInt(item.total, 10));
+		} else {
+			await loadData();
+		}
+	});
 </script>
 
-<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-	<div class="flex flex-col gap-4">
-		<Label class="mb-2">中獎: {lastPrize}</Label>
-		<PrizeWheel
-			{prizes}
-			{spinDuration}
-			{spinRevolutions}
-			onResultChange={handlePrizeResult}
-			{turn} />
-	</div>
-	<div class="col-span-2 flex flex-col gap-4">
-		<div class="flex items-center gap-2">
-			<Label class="text-nowrap">轉動時間 (毫秒):</Label>
-			<Input type="number" bind:value={spinDuration} min="1000" class="text-right" />
-			<Button onclick={increaseDuration}>+</Button>
-			<Button onclick={decreaseDuration} disabled={spinDuration <= 1000}>-</Button>
-			<Label class="text-nowrap">轉動圈數:</Label>
-			<Input type="number" bind:value={spinRevolutions} min="1" class="text-right" />
-			<Button onclick={increaseRevolutions}>+</Button>
-			<Button onclick={decreaseRevolutions} disabled={spinRevolutions <= 1}>-</Button>
-		</div>
-		<Textarea {rows} bind:value={prize} />
-		<Button onclick={() => (turn = !turn)} disabled={turn}>
-			{turn ? '停止轉盤' : '開始轉盤'}
-		</Button>
-	</div>
+<div class="mb-2 flex items-center gap-6">
+	<Label>活動開始第{totalDays}天</Label>
+	<Label>目標步數: {targetSteps}</Label>
+	<Label>團隊步數: {teamSteps}</Label>
 </div>
+
+<Table hoverable={true} striped={true}>
+	<TableHead>
+		<TableHeadCell>名字</TableHeadCell>
+		<TableHeadCell>總步數</TableHeadCell>
+		<TableHeadCell>尚缺步數</TableHeadCell>
+		<TableHeadCell>個人達成率</TableHeadCell>
+		<TableHeadCell>團隊達成率</TableHeadCell>
+	</TableHead>
+	<TableBody>
+		{#each list as item}
+			{@const targetAchievementRate = item.total / targetSteps}
+			{@const teamAchievementRate = item.total / teamSteps}
+			{@const targetColorClass = getColor(targetAchievementRate)}
+			{@const teamColorClass = getColor(teamAchievementRate)}
+			{@const missingSteps = Math.max(0, targetSteps - item.total)}
+			{@const missingStepsStyle = getMissingStepsStyle(missingSteps)}
+			{@const encouragement = getEncouragement(missingSteps)}
+			<TableBodyRow>
+				<TableBodyCell>{item.name}</TableBodyCell>
+				<TableBodyCell>{formatNumber(item.total)}</TableBodyCell>
+				<TableBodyCell class={missingStepsStyle}>
+					<div class="block">
+						{missingSteps}
+						{encouragement}
+					</div>
+				</TableBodyCell>
+				<TableBodyCell class={targetColorClass}>
+					{formatPercentage(targetAchievementRate)}
+				</TableBodyCell>
+				<TableBodyCell class={teamColorClass}>
+					{formatPercentage(teamAchievementRate)}
+				</TableBodyCell>
+			</TableBodyRow>
+		{/each}
+	</TableBody>
+</Table>
+<Span class="fixed right-3">以上數據為人工更新，因此每天只會更新一次</Span>
