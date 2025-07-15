@@ -118,7 +118,7 @@
 		class="wheel relative mx-auto flex h-[300px] w-[300px] items-center justify-center overflow-hidden rounded-full border-8 border-gray-800"
 		style="transform: rotate({-rotation}deg);"
 		aria-label="搖獎輪盤">
-		{#each prizes as prize, i}
+		{#each prizes as _, i}
 			<!-- 每個扇形區域 -->
 			<div
 				class="segment absolute top-0 left-0 z-10 h-full w-full origin-center"

@@ -16,6 +16,7 @@
 	import { getSpreadsheetValues } from '$lib/utils/googleSheets';
 
 	let list = [];
+	let sumTotal = 0;
 
 	// 計算從 7 月 1 日到昨天的總天數
 	const startDate = dayjs('2025-07-01');
@@ -57,9 +58,9 @@
 	const getEncouragement = (missingSteps) => {
 		if (missingSteps > 5000) {
 			const missingStepsDays = Math.ceil(missingSteps / 5000);
-			return `還差 ${missingStepsDays} 天的份量，一天 5000 步並不難！加油！`;
+			return `還差 ${missingStepsDays} 天的份量，要達標 20 天你絕對不是九成之外的那人！快點補上！`;
 		} else if (missingSteps > 0) {
-			return '加油！只差一天的份量！';
+			return '只差今天的份量！加油！';
 		}
 		return '';
 	};
@@ -98,16 +99,16 @@
 </script>
 
 <div class="mb-2 flex items-center gap-6">
-	<Label>活動開始第{totalDays}天</Label>
-	<Label>目標步數: {targetSteps}</Label>
-	<Label>團隊步數: {teamSteps}</Label>
+	<Label>活動開始第 {totalDays} 天</Label>
+	<Label>目標步數: {formatNumber(targetSteps)}</Label>
+	<Label>團隊步數: {formatNumber(teamSteps)}</Label>
 </div>
 
 <Table hoverable={true} striped={true}>
 	<TableHead>
 		<TableHeadCell>名字</TableHeadCell>
 		<TableHeadCell>總步數</TableHeadCell>
-		<TableHeadCell>尚缺步數</TableHeadCell>
+		<TableHeadCell class="w-40">尚缺步數</TableHeadCell>
 		<TableHeadCell>個人達成率</TableHeadCell>
 		<TableHeadCell>團隊達成率</TableHeadCell>
 	</TableHead>

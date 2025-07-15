@@ -76,8 +76,8 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(rollup@4.41.1)
       flowbite-svelte:
-        specifier: ^1.8.6
-        version: 1.8.6(rollup@4.41.1)(svelte@5.33.14)(tailwindcss@4.1.8)
+        specifier: ^1.10.0
+        version: 1.10.0(rollup@4.41.1)(svelte@5.33.14)(tailwindcss@4.1.8)
       flowbite-svelte-icons:
         specifier: ^2.2.1
         version: 2.2.1(svelte@5.33.14)
@@ -830,6 +830,9 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
+  date-fns@4.1.0:
+    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
+
   dayjs@1.11.13:
     resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
@@ -909,8 +912,8 @@ packages:
     peerDependencies:
       svelte: ^5.0.0
 
-  flowbite-svelte@1.8.6:
-    resolution: {integrity: sha512-Brg2kj+JOeG20oOba9bWdSp53Tp1ZbZI9XmAxlbvlwOB3vBwsEGcopA80o4M434GLfzMyUP7OTIWFgb31eyRRA==}
+  flowbite-svelte@1.10.0:
+    resolution: {integrity: sha512-ji7MqqlH+NGzreNZs5GTluPDNuzthBe0ZTJ5/kCy2JVB658RP4L84l+2oeT4dxK3QXjEXdb9e//azqNEqo7oUw==}
     peerDependencies:
       svelte: ^5.0.0
       tailwindcss: ^4.1.4
@@ -2018,6 +2021,8 @@ snapshots:
 
   cssesc@3.0.0: {}
 
+  date-fns@4.1.0: {}
+
   dayjs@1.11.13: {}
 
   debug@4.4.1:
@@ -2106,12 +2111,13 @@ snapshots:
       svelte: 5.33.14
       tailwind-merge: 3.3.1
 
-  flowbite-svelte@1.8.6(rollup@4.41.1)(svelte@5.33.14)(tailwindcss@4.1.8):
+  flowbite-svelte@1.10.0(rollup@4.41.1)(svelte@5.33.14)(tailwindcss@4.1.8):
     dependencies:
       '@floating-ui/dom': 1.7.2
       '@floating-ui/utils': 0.2.10
       apexcharts: 4.7.0
       clsx: 2.1.1
+      date-fns: 4.1.0
       flowbite: 3.1.2(rollup@4.41.1)
       svelte: 5.33.14
       tailwind-merge: 3.3.1

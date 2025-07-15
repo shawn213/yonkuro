@@ -130,7 +130,13 @@
 	async function updateSymbols() {
 		items = [];
 		allSymbols = inputs.map((input, index) => {
-			const symbols = input
+			let inputTrimmed = input.trim();
+			// 特殊處理第二個輸入框
+			if (index === 1 && inputTrimmed === import.meta.env.VITE_TEAM_NAME) {
+				inputTrimmed = import.meta.env.VITE_TEAM_MEMBERS;
+			}
+
+			const symbols = inputTrimmed
 				.split(/[\r\n,;]+/)
 				.map((s: string) => s.trim())
 				.filter((s: string) => s);
