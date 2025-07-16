@@ -1,9 +1,12 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
+    inputs:
+      code:
+        description: '輸入隱藏的案件' # 提示文字
+        required: true
+        type: string
 
 permissions:
   contents: read
