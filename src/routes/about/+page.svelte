@@ -8,15 +8,17 @@
 		TableHead,
 		TableHeadCell,
 		Label,
-		Span
+		Span,
+		Img
 	} from 'flowbite-svelte';
 	import dayjs from 'dayjs';
 	import { stepDataStore } from '$stores/localforageStore';
+	import { slide } from 'svelte/transition';
 	import _ from 'lodash';
 	import { getSpreadsheetValues } from '$lib/utils/googleSheets';
 
-	let list = [];
-	let sumTotal = 0;
+	let list = $state([]);
+	let openRow = $state();
 
 	// 計算從 7 月 1 日到昨天的總天數
 	const startDate = dayjs('2025-07-01');
@@ -63,6 +65,13 @@
 			return '只差今天的份量！加油！';
 		}
 		return '';
+	};
+
+	const toggleRow = (i, missingSteps) => {
+		const missingStepsDays = Math.ceil(missingSteps / 5000);
+		if (missingStepsDays >= 1 && totalDays > 20) {
+			openRow = openRow === i ? null : i;
+		}
 	};
 
 	// 添加千分號格式化函數
@@ -113,7 +122,7 @@
 		<TableHeadCell>團隊達成率</TableHeadCell>
 	</TableHead>
 	<TableBody>
-		{#each list as item}
+		{#each list as item, i}
 			{@const targetAchievementRate = item.total / targetSteps}
 			{@const teamAchievementRate = item.total / teamSteps}
 			{@const targetColorClass = getColor(targetAchievementRate)}
@@ -121,7 +130,7 @@
 			{@const missingSteps = Math.max(0, targetSteps - item.total)}
 			{@const missingStepsStyle = getMissingStepsStyle(missingSteps)}
 			{@const encouragement = getEncouragement(missingSteps)}
-			<TableBodyRow>
+			<TableBodyRow onclick={() => toggleRow(i, missingSteps)}>
 				<TableBodyCell>{item.name}</TableBodyCell>
 				<TableBodyCell>{formatNumber(item.total)}</TableBodyCell>
 				<TableBodyCell class={missingStepsStyle}>
@@ -137,6 +146,17 @@
 					{formatPercentage(teamAchievementRate)}
 				</TableBodyCell>
 			</TableBodyRow>
+			{#if openRow === i}
+				<TableBodyRow>
+					<TableBodyCell colspan={5} class="p-0">
+						<div
+							class="flex justify-center px-2 py-3"
+							transition:slide={{ duration: 300, axis: 'y' }}>
+							<Img src="https://i.meee.com.tw/DzMo8qC.png" />
+						</div>
+					</TableBodyCell>
+				</TableBodyRow>
+			{/if}
 		{/each}
 	</TableBody>
 </Table>
