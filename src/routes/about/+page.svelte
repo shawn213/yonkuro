@@ -69,8 +69,8 @@
 
 	const toggleRow = (i, missingSteps) => {
 		const missingStepsDays = Math.ceil(missingSteps / 5000);
-		if (missingStepsDays >= 1 && totalDays > 20) {
-			openRow = openRow === i ? null : i;
+		if (missingStepsDays >= 2 && totalDays > 15) {
+			openRow = i;
 		}
 	};
 
@@ -130,7 +130,7 @@
 			{@const missingSteps = Math.max(0, targetSteps - item.total)}
 			{@const missingStepsStyle = getMissingStepsStyle(missingSteps)}
 			{@const encouragement = getEncouragement(missingSteps)}
-			<TableBodyRow onclick={() => toggleRow(i, missingSteps)}>
+			<TableBodyRow onmouseover={() => toggleRow(i, missingSteps)}>
 				<TableBodyCell>{item.name}</TableBodyCell>
 				<TableBodyCell>{formatNumber(item.total)}</TableBodyCell>
 				<TableBodyCell class={missingStepsStyle}>
