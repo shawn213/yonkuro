@@ -86,7 +86,9 @@
 				{ name: 'Json', href: `${base}/tools/json`, icon: 'LaptopCodeOutline' },
 				{ name: 'MyBatis', href: `${base}/tools/mybatis`, icon: 'LaptopCodeOutline' },
 				{ name: 'Lottery', href: `${base}/tools/lottery` },
-				{ name: 'Prize', href: `${base}/tools/prize` }
+				{ name: 'Prize', href: `${base}/tools/prize` },
+				{ name: 'Countdown', href: `${base}/tools/countdown` },
+				{ name: 'Flip Card', href: `${base}/tools/flipclock`, icon: 'ClockOutline' }
 			]
 		}
 	];
