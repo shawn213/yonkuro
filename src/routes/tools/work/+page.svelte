@@ -14,8 +14,8 @@
 	import _ from 'lodash';
 	import { holidayStore } from '$stores/advancedGenericStore';
 
-	let startMonth = dayjs().format('YYYYMM');
-	let endMonth = dayjs().format('YYYYMM');
+	let startMonth = dayjs().format('YYYY-MM');
+	let endMonth = dayjs().format('YYYY-MM');
 	let manDay = 1;
 	let totalWorkDay = 0;
 	let totalPercentDay = 0;
@@ -38,8 +38,8 @@
 
 	$: {
 		items = [];
-		let startDay = dayjs(startMonth, 'YYYYMM').startOf('month');
-		const endDay = dayjs(endMonth, 'YYYYMM').endOf('month').startOf('date');
+		let startDay = dayjs(startMonth, 'YYYY-MM').startOf('month');
+		const endDay = dayjs(endMonth, 'YYYY-MM').endOf('month').startOf('date');
 		let preMonth = startDay.month();
 		let idx = 0;
 		let workDay = 0;
@@ -78,51 +78,53 @@
 	}
 </script>
 
-<div class="block">
-	<div class="mb-4">
-		<Label class="mb-1">開始月份</Label>
-		<Input bind:value={startMonth} />
+<div class="grid grid-cols-1 gap-2 sm:grid-cols-6">
+	<div>
+		<div class="mb-4">
+			<Label class="mb-1">開始月份</Label>
+			<Input type="month" bind:value={startMonth} />
+		</div>
+		<div class="mb-4">
+			<Label class="mb-1">結束月份</Label>
+			<Input type="month" bind:value={endMonth} />
+		</div>
+		<div class="mb-4">
+			<Label class="mb-1">man/month</Label>
+			<Input type="number" bind:value={manDay} />
+		</div>
 	</div>
-	<div class="mb-4">
-		<Label class="mb-1">結束月份</Label>
-		<Input bind:value={endMonth} />
-	</div>
-	<div class="mb-4">
-		<Label class="mb-1">man/month</Label>
-		<Input bind:value={manDay} />
-	</div>
-	{#if items.length > 0}
-		<Table>
-			<TableHead>
-				<TableHeadCell>Month</TableHeadCell>
-				{#each items as item}
-					<TableHeadCell>{item.month}</TableHeadCell>
-				{/each}
-				<TableHeadCell padding="px-6">總共</TableHeadCell>
-			</TableHead>
-			<TableBody>
-				<TableBodyRow>
-					<TableBodyCell>總天數</TableBodyCell>
-					{#each items as item}
-						<TableBodyCell>{item.workDay}</TableBodyCell>
-					{/each}
-					<TableBodyCell>{totalWorkDay}</TableBodyCell>
-				</TableBodyRow>
-				<TableBodyRow>
-					<TableBodyCell>換算天數</TableBodyCell>
-					{#each items as item}
-						<TableBodyCell>{item.percentDay}</TableBodyCell>
-					{/each}
-					<TableBodyCell>{totalPercentDay}</TableBodyCell>
-				</TableBodyRow>
-				<TableBodyRow>
-					<TableBodyCell>換算工時</TableBodyCell>
-					{#each items as item}
-						<TableBodyCell>{item.percentTime}</TableBodyCell>
-					{/each}
-					<TableBodyCell>{totalPercentTime}</TableBodyCell>
-				</TableBodyRow>
-			</TableBody>
-		</Table>
-	{/if}
 </div>
+{#if items.length > 0}
+	<Table>
+		<TableHead>
+			<TableHeadCell>Month</TableHeadCell>
+			{#each items as item}
+				<TableHeadCell>{item.month}</TableHeadCell>
+			{/each}
+			<TableHeadCell padding="px-6">總共</TableHeadCell>
+		</TableHead>
+		<TableBody>
+			<TableBodyRow>
+				<TableBodyCell>總天數</TableBodyCell>
+				{#each items as item}
+					<TableBodyCell>{item.workDay}</TableBodyCell>
+				{/each}
+				<TableBodyCell>{totalWorkDay}</TableBodyCell>
+			</TableBodyRow>
+			<TableBodyRow>
+				<TableBodyCell>換算天數</TableBodyCell>
+				{#each items as item}
+					<TableBodyCell>{item.percentDay}</TableBodyCell>
+				{/each}
+				<TableBodyCell>{totalPercentDay}</TableBodyCell>
+			</TableBodyRow>
+			<TableBodyRow>
+				<TableBodyCell>換算工時</TableBodyCell>
+				{#each items as item}
+					<TableBodyCell>{item.percentTime}</TableBodyCell>
+				{/each}
+				<TableBodyCell>{totalPercentTime}</TableBodyCell>
+			</TableBodyRow>
+		</TableBody>
+	</Table>
+{/if}

@@ -69,8 +69,8 @@
 
 	const toggleRow = (i, missingSteps) => {
 		const missingStepsDays = Math.ceil(missingSteps / 5000);
-		if (missingStepsDays >= 1 && totalDays > 20) {
-			openRow = openRow === i ? null : i;
+		if (missingStepsDays >= 2 && totalDays > 15) {
+			openRow = i;
 		}
 	};
 
@@ -130,7 +130,7 @@
 			{@const missingSteps = Math.max(0, targetSteps - item.total)}
 			{@const missingStepsStyle = getMissingStepsStyle(missingSteps)}
 			{@const encouragement = getEncouragement(missingSteps)}
-			<TableBodyRow onclick={() => toggleRow(i, missingSteps)}>
+			<TableBodyRow onmouseover={() => toggleRow(i, missingSteps)}>
 				<TableBodyCell>{item.name}</TableBodyCell>
 				<TableBodyCell>{formatNumber(item.total)}</TableBodyCell>
 				<TableBodyCell class={missingStepsStyle}>
@@ -152,7 +152,7 @@
 						<div
 							class="flex justify-center px-2 py-3"
 							transition:slide={{ duration: 300, axis: 'y' }}>
-							<Img src="https://i.meee.com.tw/DzMo8qC.png" />
+							<Img src="https://i.meee.com.tw/X0cE3rJ.gif" />
 						</div>
 					</TableBodyCell>
 				</TableBodyRow>
