@@ -15,7 +15,7 @@
 	<div class="h-80 w-80 bg-white md:h-96 md:w-96">
 		<QR
 			data={page.url.origin + page.url.pathname}
-			logo="https://svelte.dev/favicon.png"
+			logo="https://i.meee.com.tw/X0cE3rJ.gif"
 			moduleFill="green"
 			anchorOuterFill="green"
 			anchorInnerFill="green"

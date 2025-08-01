@@ -38,6 +38,11 @@ export const holidayDataStore = createStore({
 	description: '用於儲存假期資料'
 });
 
+export const workDataStore = createStore({
+	storeName: 'work_store',
+	description: '用於儲存工作資料'
+});
+
 // 導出一個全域的 stores 對象，用來存儲和管理所有動態創建的實例
 export const stores: Record<string, LocalForage> = {
 	stepData: stepDataStore,

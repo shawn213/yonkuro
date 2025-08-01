@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Input, Button, Label, Span, Table, Toggle } from 'flowbite-svelte';
+	import { Input, Button, Label, Span, Table, Toggle, Textarea } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 
 	// 使用陣列的陣列來存儲所有輪子的符號
@@ -14,6 +14,7 @@
 	let spinning = false;
 	let items = [];
 	let isGroupMode = false; // 添加分組模式開關
+	const rows = 2; // 預設兩行
 
 	// 輸入框的陣列
 	let inputs = [];
@@ -134,6 +135,7 @@
 			// 特殊處理第二個輸入框
 			if (index === 1 && inputTrimmed === import.meta.env.VITE_TEAM_NAME) {
 				inputTrimmed = import.meta.env.VITE_TEAM_MEMBERS;
+				inputs[index] = inputTrimmed; // 更新輸入框內容
 			}
 
 			const symbols = inputTrimmed
@@ -184,7 +186,7 @@
 				<Label for="symbols{i}" class="mb-2 block text-sm font-bold">
 					符號 {i + 1} (用逗號分隔):
 				</Label>
-				<Input type="text" id="symbols{i}" bind:value={inputs[i]} />
+				<Textarea {rows} id="symbols{i}" bind:value={inputs[i]} />
 			</div>
 		{/each}
 

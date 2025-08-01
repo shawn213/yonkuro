@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { base } from '$app/paths';
 	import { goto } from '$app/navigation';
-	import { menuStore } from '$stores/advancedGenericStore';
+	import { menuStore } from '$stores/menuStore';
 
 	onMount(() => {
 		if (page.url.pathname !== `${base}/tools/work` && !$menuStore) {

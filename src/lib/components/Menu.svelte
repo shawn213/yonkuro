@@ -8,13 +8,12 @@
 		NavHamburger,
 		DarkMode,
 		Dropdown,
-		DropdownItem,
-		Indicator
+		DropdownItem
 	} from 'flowbite-svelte';
 	import * as Icon from 'flowbite-svelte-icons';
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
-	import { menuStore } from '$stores/advancedGenericStore';
+	import { menuStore } from '$stores/menuStore';
 
 	let timer;
 	let touchStartX = 0;
@@ -79,15 +78,19 @@
 		{
 			name: 'Tools',
 			show: true,
+			childs: [{ name: 'Work', href: `${base}/tools/work`, icon: 'ClockOutline', show: true }]
+		},
+		{
+			name: 'hidden',
+			show: false,
 			childs: [
-				{ name: 'Work', href: `${base}/tools/work`, icon: 'ClockOutline', show: true },
-				{ name: 'Encryption', href: `${base}/tools/encryption`, icon: 'LockOutline' },
-				{ name: 'Yaml', href: `${base}/tools/yaml`, icon: 'LaptopCodeOutline' },
-				{ name: 'Json', href: `${base}/tools/json`, icon: 'LaptopCodeOutline' },
-				{ name: 'MyBatis', href: `${base}/tools/mybatis`, icon: 'LaptopCodeOutline' },
-				{ name: 'Lottery', href: `${base}/tools/lottery` },
-				{ name: 'Prize', href: `${base}/tools/prize` },
-				{ name: 'Week', href: `${base}/tools/week`, icon: 'CalendarOutline' }
+				{ name: 'Encryption', href: `${base}/hidden/encryption`, icon: 'LockOutline', show: false },
+				{ name: 'Yaml', href: `${base}/hidden/yaml`, icon: 'LaptopCodeOutline' },
+				{ name: 'Json', href: `${base}/hidden/json`, icon: 'LaptopCodeOutline' },
+				{ name: 'MyBatis', href: `${base}/hidden/mybatis`, icon: 'LaptopCodeOutline' },
+				{ name: 'Lottery', href: `${base}/hidden/lottery` },
+				{ name: 'Prize', href: `${base}/hidden/prize` },
+				{ name: 'Week', href: `${base}/hidden/week`, icon: 'CalendarEditOutline' }
 			]
 		}
 	];
@@ -102,7 +105,7 @@
 	<NavBrand href="{base}/">
 		<img src="https://svelte.dev/favicon.png" class="mr-3 h-6 sm:h-9" alt="Svelte Logo" />
 		{#if $menuStore}
-			<Indicator color="red" />
+			<Icon.EyeOutline color="red" />
 		{/if}
 		<!-- <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             選擇障礙
@@ -121,7 +124,7 @@
 							{#if child.show || $menuStore}
 								<DropdownItem href={child.href} class="flex items-center gap-2">
 									<svelte:component
-										this={child.icon ? Icon[child.icon] : Icon.AppleSolid} />{child.name}
+										this={child.icon ? Icon[child.icon] : Icon.EyeSlashOutline} />{child.name}
 								</DropdownItem>
 							{/if}
 						{/each}

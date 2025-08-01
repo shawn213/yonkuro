@@ -12,7 +12,7 @@
 	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
 	import _ from 'lodash';
-	import { holidayStore } from '$stores/advancedGenericStore';
+	import { holidayStore } from '$stores/holidayStore';
 
 	let startMonth = dayjs().format('YYYY-MM');
 	let endMonth = dayjs().format('YYYY-MM');
