@@ -74,7 +74,7 @@
 	// 菜單項目定義
 	const menues = [
 		{ name: 'Home', href: `${base}/`, show: true },
-		{ name: 'About', href: `${base}/about`, show: true },
+		{ name: 'Lottery', href: `${base}/lottery`, show: true },
 		{
 			name: 'Tools',
 			show: true,
