@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Pages
 
 on:
   workflow_dispatch:
@@ -44,6 +44,10 @@ jobs:
           echo "VITE_VERSION=v0.0.${{ github.run_number }}" >> .env
           echo "VITE_GOOGLE_API_KEY=${{ secrets.VITE_GOOGLE_API_KEY }}" >> .env
           echo "VITE_HOLIDAY_SHEET=${{ secrets.VITE_HOLIDAY_SHEET }}" >> .env
+          echo "VITE_STEP_SHEET=${{ secrets.VITE_STEP_SHEET }}" >> .env
+          echo "VITE_HIDDEN_CODE=${{ inputs.code }}" >> .env
+          echo "VITE_TEAM_NAME=${{ vars.VITE_TEAM_NAME }}" >> .env
+          echo "VITE_TEAM_MEMBERS=${{ vars.VITE_TEAM_MEMBERS }}" >> .env
         # 這裡用 GitHub Secrets 儲存敏感參數，並用 tag 名稱當版本號
 
       - name: Build the app
