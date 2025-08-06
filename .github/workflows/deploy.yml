@@ -52,7 +52,7 @@ jobs:
 
       - name: Build the app
         env:
-          BASE_PATH: /${{ github.event.repository.name }}
+          BASE_PATH: /lunch
         run: pnpm build
 
       - name: Upload artifact for GitHub Pages
