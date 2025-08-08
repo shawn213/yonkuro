@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       code:
-        description: 'Fill your code here' # 提示文字
+        description: '輸入您的案件代碼' # 提示文字
         required: true
         type: string
 

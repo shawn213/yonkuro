@@ -157,9 +157,9 @@
 <Tooltip triggeredBy="[id^='ref-']" placement="bottom">
 	<div class="flex flex-col space-y-2">
 		<Span>1. 網址列塗黑區塊是你的 sheetID</Span>
-		<Span>2. 最下方紅框是你的 sheet name</Span>
+		<Span>2. 最下方黃色框是你的 sheet name</Span>
 		<Span>3. 必須確認你的 sheet 權限是開啟的狀態</Span>
-		<Span>4. header 是你要拿來抽籤的欄位名稱</Span>
+		<Span>4. header 是第一列為欄位名稱</Span>
 	</div>
-	<Img src={imageUrl} alt="Example Image" class="h-auto w-200" />
+	<Img src={imageUrl} alt="Example Image" class="h-auto w-256" />
 </Tooltip>

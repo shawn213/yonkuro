@@ -18,7 +18,7 @@
 	const getHolidays = async () => {
 		const data = await getSpreadsheetValues(import.meta.env.VITE_HOLIDAY_SHEET, 'now');
 		holidayDataStore.setItem('holidays', { days: data, date: dayjs().format('YYYY-MM') });
-		holidayStore.set({ days: data, date: dayjs().format('YYYY-MM') });
+		holidayStore.set({ days: data.rows, date: dayjs().format('YYYY-MM') });
 		return data;
 	};
 
