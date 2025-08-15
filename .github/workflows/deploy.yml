@@ -1,9 +1,12 @@
 name: Deploy Pages
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
+    inputs:
+      code:
+        description: '輸入您的按鍵代碼' # 提示文字
+        required: true
+        type: string
 
 permissions:
   contents: read
